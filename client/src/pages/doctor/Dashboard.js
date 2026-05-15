@@ -112,7 +112,7 @@ const DoctorDashboard = () => {
                     <TableCell><strong>{rec.diagnosis}</strong></TableCell>
                     <TableCell>Dr. {rec.doctorId?.name}</TableCell>
                     <TableCell align="center">
-                      <Button size="small" variant="text" onClick={() => navigate(`/report/${rec._id}`)} sx={{ mr: 1 }}>View Report</Button>
+                      <Button size="small" variant="text" onClick={() => window.open(`/report/${rec._id}`, '_blank')} sx={{ mr: 1 }}>View Report</Button>
                       {rec.reportFile && (
                         <Button size="small" variant="outlined" color="secondary" href={`/${rec.reportFile}`} target="_blank">Attachment</Button>
                       )}

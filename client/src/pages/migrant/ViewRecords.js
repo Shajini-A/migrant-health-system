@@ -42,7 +42,7 @@ const ViewRecords = () => {
                       Doctor: {record.doctorId?.name || 'N/A'} | Hospital: {record.hospitalId?.name || 'N/A'}
                     </Typography>
                     <Box mt={2} display="flex" gap={2}>
-                      <Button variant="contained" size="small" onClick={() => window.location.href = `/report/${record._id}`}>
+                      <Button variant="contained" size="small" onClick={() => window.open(`/report/${record._id}`, '_blank')}>
                         Generate Official Report
                       </Button>
                       {record.reportFile && (
