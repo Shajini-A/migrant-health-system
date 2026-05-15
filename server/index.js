@@ -44,7 +44,7 @@ app.use('/api/migrant', migrantRoutes);
 const clientBuildPath = path.join(__dirname, '../client/build');
 if (fs.existsSync(clientBuildPath)) {
   app.use(express.static(clientBuildPath));
-  app.get('/*', (req, res) => {
+  app.get('/*path', (req, res) => {
     if (!req.path.startsWith('/api')) {
       res.sendFile(path.join(clientBuildPath, 'index.html'));
     }
