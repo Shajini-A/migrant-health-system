@@ -54,10 +54,14 @@ router.get('/outbreaks', async (req, res) => {
     const outbreaks = await HealthRecord.aggregate([
       { $match: { date: { $gte: sevenDaysAgo } } },
       { $group: {
-          _id: { diagnosis: "$diagnosis", hospitalId: "$hospitalId" },
-          count: { $sum: 1 }
+          _id: { 
+            diagnosis: { $toUpper: "$diagnosis" }, // Normalize to uppercase
+            hospitalId: "$hospitalId" 
+          },
+          count: { $sum: 1 },
+          originalDiagnosis: { $first: "$diagnosis" } // Keep original name for display
       }},
-      { $match: { count: { $gt: 5 } } },
+      { $match: { count: { $gte: 3 } } }, // Trigger at 3 or more cases
       { $lookup: {
           from: 'hospitals',
           localField: '_id.hospitalId',
@@ -67,7 +71,7 @@ router.get('/outbreaks', async (req, res) => {
       { $unwind: '$hospitalInfo' },
       { $project: {
           _id: 0,
-          diagnosis: '$_id.diagnosis',
+          diagnosis: '$originalDiagnosis',
           hospitalName: '$hospitalInfo.name',
           hospitalId: '$hospitalInfo.hospitalId',
           count: 1
