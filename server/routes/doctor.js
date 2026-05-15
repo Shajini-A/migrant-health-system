@@ -104,4 +104,17 @@ router.get('/records/:id', async (req, res) => {
   }
 });
 
+// Get ALL Records for the Doctor's Hospital
+router.get('/records', async (req, res) => {
+  try {
+    const records = await HealthRecord.find({ hospitalId: req.user.hospitalId })
+      .populate('patientId', 'name phone')
+      .populate('doctorId', 'name')
+      .sort({ date: -1 });
+    res.json(records);
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 module.exports = router;
