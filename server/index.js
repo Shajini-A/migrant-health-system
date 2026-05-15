@@ -5,6 +5,12 @@ const dotenv = require('dotenv');
 const path = require('path');
 const fs = require('fs');
 
+// Ensure uploads directory exists (Safety Guard for Render)
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir);
+}
+
 // Load env variables
 dotenv.config();
 
