@@ -17,7 +17,8 @@ router.post('/hospitals', async (req, res) => {
     await newHospital.save();
     res.status(201).json(newHospital);
   } catch (err) {
-    res.status(500).json({ error: 'Error creating hospital' });
+    console.error('Hospital Creation Error:', err);
+    res.status(500).json({ error: err.message || 'Error creating hospital' });
   }
 });
 

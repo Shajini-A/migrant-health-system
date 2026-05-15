@@ -37,7 +37,8 @@ const AddDoctor = () => {
       setHId(''); setHName(''); setHLoc('');
       fetchHospitals();
     } catch (err) {
-      alert('Error creating hospital');
+      const errorMsg = err.response?.data?.error || 'Error creating hospital';
+      alert(errorMsg);
     }
   };
 
@@ -54,7 +55,8 @@ const AddDoctor = () => {
       alert('Doctor added successfully!');
       setDName(''); setDId(''); setDHospital(''); setSpec(''); setPassword('');
     } catch (err) {
-      alert('Error adding doctor. Make sure you selected a hospital.');
+      const errorMsg = err.response?.data?.error || 'Error adding doctor';
+      alert(errorMsg);
     }
   };
 
