@@ -46,7 +46,7 @@ const ViewRecords = () => {
                         Generate Official Report
                       </Button>
                       {record.reportFile && (
-                        <Button variant="outlined" size="small" href={`http://localhost:5000/${record.reportFile}`} target="_blank">
+                        <Button variant="outlined" size="small" href={`/${record.reportFile}`} target="_blank">
                           View Attachment
                         </Button>
                       )}
